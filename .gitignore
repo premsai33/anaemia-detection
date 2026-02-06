@@ -1,0 +1,16 @@
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore ML model files
+*.pkl
+
+# Ignore datasets
+*.csv
+
+# Ignore logs
+daily_logs/
+
+# Ignore system files
+.DS_Store
+Thumbs.db

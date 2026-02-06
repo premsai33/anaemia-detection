@@ -1,0 +1,28 @@
+import joblib
+import pandas as pd
+
+# Load model and scaler
+model = joblib.load("anemia_model.pkl")
+scaler = joblib.load("scaler.pkl")
+
+# Example new wearable data
+new_data = pd.DataFrame(
+    [[45, 1, 5.2, 102, 92, 4200]],
+    columns=["Age", "Gender", "SleepHours", "HeartRate", "SpO2", "Steps"]
+)
+
+# Scale input
+new_data_scaled = scaler.transform(new_data)
+
+# Get probability
+probability = model.predict_proba(new_data_scaled)[0][1]
+
+print(f"\nAnemia Risk Probability: {round(probability*100, 2)}%")
+
+# Risk level classification
+if probability < 0.4:
+    print("Anemia Level: NORMAL 🟢")
+elif probability < 0.7:
+    print("Anemia Level: MODERATE RISK 🟡")
+else:
+    print("Anemia Level: HIGH RISK 🔴")
